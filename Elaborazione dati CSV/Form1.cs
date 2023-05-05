@@ -61,8 +61,47 @@ namespace Elaborazione_dati_CSV
         {
 
         }
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            Lunghezzamax(p);
+        }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
         {
 
         }
@@ -103,12 +142,12 @@ namespace Elaborazione_dati_CSV
 
         public string Str(Elementi[] p, int dim)
         {
-            return p[dim].COD_ACQ + ";" + p[dim].ACQUEDOTTO + ";" + p[dim].COMUNE + ";" + p[dim].SIGLA_PROV + ";" + p[dim].CAP + ";" + p[dim].DISTRETTO + ";" + p[dim].COD_PROD + ";" + p[dim].PRODUTTORE + ";" + p[dim].LUOGO_PREL + ";" + p[dim].ETICHETTA + ";" + p[dim].NOTE + ";" + p[dim].Casual;
+            return p[dim].COD_ACQ + ";" + p[dim].ACQUEDOTTO + ";" + p[dim].COMUNE + ";" + p[dim].SIGLA_PROV + ";" + p[dim].CAP + ";" + p[dim].DISTRETTO + ";" + p[dim].COD_PROD + ";" + p[dim].PRODUTTORE + ";" + p[dim].LUOGO_PREL + ";" + p[dim].ETICHETTA + ";" + p[dim].NOTE;
         }
 
         public void Aggiunta(Elementi[] p)
         {
-
+            
             Random num = new Random();
 
             StreamWriter sw = new StreamWriter(path);
@@ -129,7 +168,7 @@ namespace Elaborazione_dati_CSV
                     p[dim].Casual = a.ToString();
                 }                
 
-                string d = Str(p, dim);
+                string d = Str(p, dim) + ";" + p[dim].Casual;
 
                 sw.WriteLine(d);
                 b++;
@@ -138,6 +177,125 @@ namespace Elaborazione_dati_CSV
             }
 
             sw.Close();
+        }
+
+        public void Lunghezzamax(Elementi[] p)
+        {
+            StreamReader sr = new StreamReader(path);
+
+            dim = 0;
+
+            string a = sr.ReadLine();
+
+            string q = p[dim].COD_ACQ;
+            string w = p[dim].ACQUEDOTTO;
+            string e = p[dim].COMUNE;
+            string r = p[dim].SIGLA_PROV;
+            string t = p[dim].CAP;
+            string y = p[dim].DISTRETTO;
+            string u = p[dim].PRODUTTORE;
+            string i = p[dim].LUOGO_PREL;
+            string o = p[dim].ETICHETTA;
+            string l = p[dim].NOTE;
+            string k = p[dim].Casual;
+
+
+            while (a != null)
+            {
+                string b = sr.ReadLine();
+
+                if (b != null)
+                {
+                    if (a.Length < b.Length)
+                    {
+                        a = b;
+                    }
+
+                    if ((p[dim].COD_ACQ).Length < (p[dim+1].COD_ACQ).Length)
+                    {
+                        q = p[dim + 1].COD_ACQ;
+                    }
+
+                    if ((p[dim].ACQUEDOTTO).Length < (p[dim + 1].ACQUEDOTTO).Length)
+                    {
+                        w = p[dim + 1].ACQUEDOTTO;
+                    }
+
+                    if ((p[dim].COMUNE).Length < (p[dim + 1].COMUNE).Length)
+                    {
+                        e = p[dim + 1].COMUNE;
+                    }
+
+                    if ((p[dim].SIGLA_PROV).Length < (p[dim + 1].SIGLA_PROV).Length)
+                    {
+                        r = p[dim + 1].SIGLA_PROV;
+                    }
+
+                    if ((p[dim].CAP).Length < (p[dim + 1].CAP).Length)
+                    {
+                        t = p[dim + 1].CAP;
+                    }
+
+                    if ((p[dim].DISTRETTO).Length < (p[dim + 1].DISTRETTO).Length)
+                    {
+                        y = p[dim + 1].DISTRETTO;
+                    }
+
+                    if ((p[dim].PRODUTTORE).Length < (p[dim + 1].PRODUTTORE).Length)
+                    {
+                        u = p[dim + 1].PRODUTTORE;
+                    }
+
+                    if ((p[dim].LUOGO_PREL).Length < (p[dim + 1].LUOGO_PREL).Length)
+                    {
+                        i = p[dim + 1].LUOGO_PREL;
+                    }
+
+                    if ((p[dim].ETICHETTA).Length < (p[dim + 1].ETICHETTA).Length)
+                    {
+                        o = p[dim + 1].ETICHETTA;
+                    }
+
+                    if ((p[dim].NOTE).Length < (p[dim + 1].NOTE).Length)
+                    {
+                        l = p[dim + 1].NOTE;
+                    }
+
+                    if (p[dim].Casual == null)
+                    {
+                        k = "";
+                    }
+                    else
+                    {
+                        if ((p[dim].Casual).Length < (p[dim + 1].Casual).Length )
+                        {
+                            k = p[dim + 1].Casual;
+                        }
+                    }
+
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+
+            sr.Close();
+
+            listView1.Items.Clear();
+            listView1.Items.Add("Lunghezza max riga: " + a.Length);
+            listView1.Items.Add("Lunghezza max primo campo: " + q.Length);
+            listView1.Items.Add("Lunghezza max secondo campo: " + w.Length);
+            listView1.Items.Add("Lunghezza max terzo campo: " + e.Length);
+            listView1.Items.Add("Lunghezza max quarto campo: " + r.Length);
+            listView1.Items.Add("Lunghezza max quinto campo: " + t.Length);
+            listView1.Items.Add("Lunghezza max sesto campo: " + y.Length);
+            listView1.Items.Add("Lunghezza max settimo campo: " + u.Length);
+            listView1.Items.Add("Lunghezza max ottavo campo: " + i.Length);
+            listView1.Items.Add("Lunghezza max nono campo: " + o.Length);
+            listView1.Items.Add("Lunghezza max decimo campo: " + l.Length);
+            listView1.Items.Add("Lunghezza max undicesimo campo: " + k.Length);
         }
 
 
