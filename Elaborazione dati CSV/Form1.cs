@@ -31,7 +31,7 @@ namespace Elaborazione_dati_CSV
 
         public Elementi[] p;
         public int dim;
-        public string path = @"Arrigoni.csv";
+        public string path = @"C:\Users\39370\Desktop\Elaborazione-dati-CSV-master\Elaborazione dati CSV\Arrigoni.csv";
 
         public Form1()
         {
@@ -53,16 +53,7 @@ namespace Elaborazione_dati_CSV
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Random num = new Random();
-
-            StreamReader sw = new StreamReader(path);
-
-            int a = num.Next(10, 21);
-
-            p[dim].Casual = a.ToString();
-
-
-            
+            Aggiunta(p);
 
         }
 
@@ -71,33 +62,80 @@ namespace Elaborazione_dati_CSV
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //Funzioni di servizio
 
         public void Riemp(Elementi[] p)
         {
+            StreamReader sw = new StreamReader(path);
 
-            for(int i = 0; i < p.Length; i++)
+            string a = sw.ReadLine();
+
+            while (a != null)
             {
-                StreamReader sw = new StreamReader(path);
 
-                string a = sw.ReadLine();
-                
-               string []campi = a.Split(';');
+                string[] campi = a.Split(';');
 
-                p[i].COD_ACQ = campi[0];
-                p[i].ACQUEDOTTO = campi[1];
-                p[i]. COMUNE = campi[2];
-                p[i].SIGLA_PROV = campi[3];
-                p[i].CAP = campi[4];
-                p[i].DISTRETTO = campi[5];
-                p[i].COD_PROD = campi[6];
-                p[i].PRODUTTORE = campi[7];
-                p[i].LUOGO_PREL = campi[8];
-                p[i].ETICHETTA = campi[9];
-                p[i].NOTE= campi[10];
-               
-    }
+                p[dim].COD_ACQ = campi[0];
+                p[dim].ACQUEDOTTO = campi[1];
+                p[dim].COMUNE = campi[2];
+                p[dim].SIGLA_PROV = campi[3];
+                p[dim].CAP = campi[4];
+                p[dim].DISTRETTO = campi[5];
+                p[dim].COD_PROD = campi[6];
+                p[dim].PRODUTTORE = campi[7];
+                p[dim].LUOGO_PREL = campi[8];
+                p[dim].ETICHETTA = campi[9];
+                p[dim].NOTE = campi[10];
+
+                a = sw.ReadLine();
+
+                dim++;
+            }
+
+            sw.Close();
 
         }
+
+        public string Str(Elementi[] p, int dim)
+        {
+            return p[dim].COD_ACQ + ";" + p[dim].ACQUEDOTTO + ";" + p[dim].COMUNE + ";" + p[dim].SIGLA_PROV + ";" + p[dim].CAP + ";" + p[dim].DISTRETTO + ";" + p[dim].COD_PROD + ";" + p[dim].PRODUTTORE + ";" + p[dim].LUOGO_PREL + ";" + p[dim].ETICHETTA + ";" + p[dim].NOTE + ";" + p[dim].Casual;
+        }
+
+        public void Aggiunta(Elementi[] p)
+        {
+
+            Random num = new Random();
+
+            StreamWriter sw = new StreamWriter(path);
+
+            int b = 0;
+            dim = 0;
+
+            while (b < 76)
+            {
+                int a = num.Next(10, 21);
+
+                p[dim].Casual = a.ToString();
+
+                string d = Str(p, dim);
+
+                listView1.Items.Add(d);
+
+                sw.WriteLine(d);
+                b++;
+                dim++;
+
+            }
+
+            sw.Close();
+        }
+
+
     }
 }
+
