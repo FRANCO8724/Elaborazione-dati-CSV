@@ -31,6 +31,7 @@ namespace Elaborazione_dati_CSV
 
         public Elementi[] p;
         public int dim;
+        public int lmax;
         public string path = @"C:\Users\39370\Desktop\Elaborazione-dati-CSV-master\Elaborazione dati CSV\Arrigoni.csv";
 
         public Form1()
@@ -63,17 +64,12 @@ namespace Elaborazione_dati_CSV
         }
         private void button3_Click_1(object sender, EventArgs e)
         {
-            Lunghezzamax(p);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
+            lmax = Lunghezzamax(p);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            Ridimensione(lmax, p);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -179,7 +175,7 @@ namespace Elaborazione_dati_CSV
             sw.Close();
         }
 
-        public void Lunghezzamax(Elementi[] p)
+        public int Lunghezzamax(Elementi[] p)
         {
             StreamReader sr = new StreamReader(path);
 
@@ -296,8 +292,59 @@ namespace Elaborazione_dati_CSV
             listView1.Items.Add("Lunghezza max nono campo: " + o.Length);
             listView1.Items.Add("Lunghezza max decimo campo: " + l.Length);
             listView1.Items.Add("Lunghezza max undicesimo campo: " + k.Length);
+
+            return a.Length;
         }
 
+        public void Ridimensione(int lung, Elementi[] p)
+        {
+            dim = 0;
+
+            string[] supp = new string[100];
+
+            StreamReader sw = new StreamReader(path);
+
+                    string a = sw.ReadLine();
+
+                    while (a != null)
+                    {
+                        if (p[dim].COD_ACQ != null)
+                        {
+                            int d = lung - a.Length;
+
+                            string f = "";
+
+                            for (int i = 0; i < d; i++)
+                            {
+                                f = f + " ";
+                            }
+
+                            supp[dim] = a + f;
+
+                        }
+
+                a = sw.ReadLine();
+                dim++;
+                    }
+                
+                 sw.Close();
+
+            StreamWriter sw2 = new StreamWriter(path);
+
+            dim= 0;
+
+            sw2.WriteLine(supp[dim]);
+
+            while (supp[dim] != null)
+            {
+                dim++;
+
+                sw2.WriteLine(supp[dim]);
+            }
+
+            sw2.Close();
+
+        }
 
     }
 }
