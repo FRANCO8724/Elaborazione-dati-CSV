@@ -116,15 +116,20 @@ namespace Elaborazione_dati_CSV
             int b = 0;
             dim = 0;
 
-            while (b < 76)
+            while (p[dim].COD_ACQ != null)
             {
                 int a = num.Next(10, 21);
 
-                p[dim].Casual = a.ToString();
+                if(dim == 0)
+                {
+                    p[dim].Casual = "miovalore";
+                }
+                else
+                {
+                    p[dim].Casual = a.ToString();
+                }                
 
                 string d = Str(p, dim);
-
-                listView1.Items.Add(d);
 
                 sw.WriteLine(d);
                 b++;
@@ -138,4 +143,3 @@ namespace Elaborazione_dati_CSV
 
     }
 }
-
