@@ -44,6 +44,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -189,12 +191,28 @@
             this.textBox5.Size = new System.Drawing.Size(101, 20);
             this.textBox5.TabIndex = 20;
             // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(30, 512);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(101, 20);
+            this.textBox6.TabIndex = 21;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(30, 564);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(477, 20);
+            this.textBox7.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1041, 806);
+            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
@@ -237,6 +255,8 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }
 

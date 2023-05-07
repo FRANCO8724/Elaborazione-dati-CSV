@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -89,12 +90,7 @@ namespace Elaborazione_dati_CSV
 
         private void button9_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
+            Modifica(p);
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -109,6 +105,8 @@ namespace Elaborazione_dati_CSV
             StreamReader sw = new StreamReader(path);
 
             string a = sw.ReadLine();
+
+            dim = 0;
 
             while (a != null)
             {
@@ -570,6 +568,71 @@ namespace Elaborazione_dati_CSV
             }
 
 
+        }
+
+        public void Modifica(Elementi[] p)
+        {
+            string a = textBox6.Text;
+
+            dim = 0;
+
+            using (StreamReader sw = new StreamReader(path))
+            {
+                string b = sw.ReadLine();
+
+                while (b != null)
+                {
+                    string[] campi2 = b.Split(';');
+
+                    if (campi2[0] == a)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        dim++;
+                    }
+
+                    b = sw.ReadLine();
+                }
+
+
+                string[] campi = (textBox7.Text).Split(';');
+
+                p[dim].COD_ACQ = campi[0];
+                p[dim].ACQUEDOTTO = campi[1];
+                p[dim].COMUNE = campi[2];
+                p[dim].SIGLA_PROV = campi[3];
+                p[dim].CAP = campi[4];
+                p[dim].DISTRETTO = campi[5];
+                p[dim].COD_PROD = campi[6];
+                p[dim].PRODUTTORE = campi[7];
+                p[dim].LUOGO_PREL = campi[8];
+                p[dim].ETICHETTA = campi[9];
+                p[dim].NOTE = campi[10];                
+
+            }
+
+            using(StreamWriter sw2 = new StreamWriter(path))
+            {
+                dim = 0;
+
+                for (int y = 0; y < p.Length; y++)
+                {
+                    string t = Str(p, dim);
+
+                    if (t!= ";;;;;;;;;;")
+                    {
+                        sw2.WriteLine(t);
+
+                        dim++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
         }
 
     }
