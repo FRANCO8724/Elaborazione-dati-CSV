@@ -73,8 +73,8 @@ namespace Elaborazione_dati_CSV
         }
 
         private void button6_Click(object sender, EventArgs e)
-        {
-            Aggiuntarec(p);
+        { 
+            Aggiuntarec(p); 
         }
 
         private void button7_Click(object sender, EventArgs e)
