@@ -84,7 +84,7 @@ namespace Elaborazione_dati_CSV
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            Ricerca(p);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -453,6 +453,123 @@ namespace Elaborazione_dati_CSV
 
             }
             
+        }
+
+        public void Ricerca(Elementi[] p)
+        {
+            dim = 0;
+
+            int v = 0;
+
+            using (StreamReader sw = new StreamReader(path))
+            {
+
+                string s = sw.ReadLine();
+
+                string[] campi = s.Split(';');
+
+                for (int i = 0; i < campi.Length; i++)
+                {
+
+                    if (campi[i] == textBox5.Text)
+                    {
+                        v = i;
+                    }
+
+                }
+
+            }
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+
+                string a = sr.ReadLine();
+
+               string[] n = new string[100];
+
+                string c = "";
+
+                int i = 0;
+
+
+                while (a != null)
+                {
+                    string[] campi = a.Split(';');
+
+                    n[i] = campi[v];
+
+                    a = sr.ReadLine();
+
+                    i++;
+                }
+                
+                int cont2 = 0;
+
+                int j = 1;
+
+                for (int f = 1; f < n.Length; f++)
+                {
+                    int cont = 0;
+                    c = n[f];
+
+                 
+                    if(c!=null)
+                    {
+                        while (cont2 == 0)
+                        {
+
+                            if (c != n[j])
+                            {
+                                cont++;
+                            }
+
+                            if (c == n[j])
+                            {
+                                if (f == j)
+                                {
+                                    cont++;
+                                }
+                                else
+                                {
+                                    for(int l=0;l<n.Length;l++)
+                                    {
+                                        if (n[l] == textBox5.Text)
+                                        {
+                                            n[l] = null;
+                                        }
+                                    }
+
+                                    
+                                    j = 0;
+                                    break;
+                                }
+                            }
+
+                            if (cont == i-1)
+                            {
+                                break;
+                            }
+
+                            j++;
+                        }
+
+                        
+                            
+                    }
+
+                    if(cont == i-1)
+                    {
+                        break;
+                    }
+
+                    
+                }
+
+                listView1.Clear();
+                listView1.Items.Add(c);
+            }
+
+
         }
 
     }

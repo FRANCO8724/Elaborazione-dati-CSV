@@ -38,12 +38,12 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -136,23 +136,13 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(30, 359);
+            this.button9.Location = new System.Drawing.Point(30, 447);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(164, 28);
             this.button9.TabIndex = 11;
             this.button9.Text = "Modifica record";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(30, 393);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(164, 28);
-            this.button10.TabIndex = 12;
-            this.button10.Text = "Aggiunta record ";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // textBox1
             // 
@@ -163,7 +153,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(30, 436);
+            this.button11.Location = new System.Drawing.Point(30, 624);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(164, 28);
             this.button11.TabIndex = 16;
@@ -192,18 +182,25 @@
             this.textBox4.Size = new System.Drawing.Size(101, 20);
             this.textBox4.TabIndex = 19;
             // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(30, 385);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(101, 20);
+            this.textBox5.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1041, 806);
+            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -234,12 +231,12 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
 
