@@ -32,7 +32,7 @@ namespace Elaborazione_dati_CSV
         public Elementi[] p;
         public int dim;
         public int lmax;
-        public string path = @"C:\Users\39370\Desktop\Elaborazione-dati-CSV-master\Elaborazione dati CSV\Arrigoni.csv";
+        public string path = @"C:\Users\39370\Source\Repos\Elaborazione-dati-CSV\Elaborazione dati CSV\Arrigoni.csv";
 
         public Form1()
         {
@@ -74,12 +74,12 @@ namespace Elaborazione_dati_CSV
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            Aggiuntarec(p);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            Visualcampi(p);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -344,6 +344,115 @@ namespace Elaborazione_dati_CSV
 
             sw2.Close();
 
+        }
+
+        public void Aggiuntarec(Elementi[] p)
+        {
+                using (StreamReader sw = new StreamReader(path))
+                {
+
+                    string b = textBox1.Text;
+
+                    string[] campi = b.Split(';');
+
+                dim = 0;
+
+                    int C = 0;
+
+                    while (C == 0)
+                    {
+                          string a = sw.ReadLine();
+
+                        if(a != null)
+                        {
+                            dim++;
+                        }
+                        else
+                        {
+                            p[dim].COD_ACQ = campi[0];
+                            p[dim].ACQUEDOTTO = campi[1];
+                            p[dim].COMUNE = campi[2];
+                            p[dim].SIGLA_PROV = campi[3];
+                            p[dim].CAP = campi[4];
+                            p[dim].DISTRETTO = campi[5];
+                            p[dim].COD_PROD = campi[6];
+                            p[dim].PRODUTTORE = campi[7];
+                            p[dim].LUOGO_PREL = campi[8];
+                            p[dim].ETICHETTA = campi[9];
+                            p[dim].NOTE = campi[10];
+
+                            C = 1;
+                        }
+                    }
+                }
+
+                using(StreamWriter sw = new StreamWriter(path,true))
+                {
+                    sw.WriteLine(Str(p,dim));
+                }
+            
+        }
+
+        public void Visualcampi(Elementi[]p)
+        {
+            int v = 0;
+            int b = 0;
+            int c = 0;
+
+            using (StreamReader sw = new StreamReader(path))
+            {                
+
+                string s = sw.ReadLine();
+
+                string[] campi = s.Split(';');
+
+                for (int i = 0;i<campi.Length;i++)
+                {
+
+                    if (campi[i] == textBox2.Text)
+                    {
+                        v = i;
+                    }
+                    if (campi[i] == textBox3.Text)
+                    {
+                        b = i;
+                    }
+                    if (campi[i] == textBox4.Text)
+                    {
+                        c = i;
+                    }
+
+                }
+
+            }
+
+            dim = 0;
+
+
+
+            using (StreamReader sr = new StreamReader(path))
+            {
+                  
+                string a = sr.ReadLine();
+
+                
+
+                listView1.Clear();
+
+                while (a != null)
+                {
+                    string[] campi = a.Split(';');
+
+                    listView1.Items.Add("Campo 1: " + campi[v]);
+                    listView1.Items.Add("Campo 2: " + campi[b]);
+                    listView1.Items.Add("Campo 3: " + campi[c]);
+                    listView1.Items.Add("");
+
+                    a = sr.ReadLine();
+                }
+
+            }
+            
         }
 
     }
