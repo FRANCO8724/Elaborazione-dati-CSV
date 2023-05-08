@@ -61,7 +61,7 @@ namespace Elaborazione_dati_CSV
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Numcampi(p);
         }
         private void button3_Click_1(object sender, EventArgs e)
         {
@@ -171,6 +171,78 @@ namespace Elaborazione_dati_CSV
             }
 
             sw.Close();
+        }
+
+        public void Numcampi(Elementi[] p)
+        {
+            listView1.Items.Clear();
+
+            dim = 0;
+
+            for (int i=0; i<p.Length; i++)
+            {
+                int a = 0;
+
+                if (p[dim].COD_ACQ != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].ACQUEDOTTO != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].COMUNE != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].SIGLA_PROV != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].CAP != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].DISTRETTO != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].PRODUTTORE != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].LUOGO_PREL != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].ETICHETTA != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].NOTE != null)
+                {
+                    a++;
+                }
+
+                if (p[dim].Casual != null)
+                {
+                    a++;
+                }
+
+                
+                listView1.Items.Add("Campi riga: " + a);
+                dim++;
+
+            }
         }
 
         public int Lunghezzamax(Elementi[] p)
@@ -609,7 +681,7 @@ namespace Elaborazione_dati_CSV
                 p[dim].PRODUTTORE = campi[7];
                 p[dim].LUOGO_PREL = campi[8];
                 p[dim].ETICHETTA = campi[9];
-                p[dim].NOTE = campi[10];                
+                p[dim].NOTE = campi[10];  
 
             }
 
