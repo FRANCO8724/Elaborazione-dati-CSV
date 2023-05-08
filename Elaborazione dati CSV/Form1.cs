@@ -14,6 +14,7 @@ namespace Elaborazione_dati_CSV
 {
     public partial class Form1 : Form
     {
+        //Nella struct dichiaro tutti i campi 
         public struct Elementi
         {
             public string COD_ACQ;
@@ -30,6 +31,7 @@ namespace Elaborazione_dati_CSV
             public string Casual;
         }
 
+        //Rendo gli elementi richiamabili in ogni parte del codice
         public Elementi[] p;
         public int dim;
         public int lmax;
@@ -38,8 +40,12 @@ namespace Elaborazione_dati_CSV
         public Form1()
         {
             InitializeComponent();
+
+            //Dichiaro dimensioni della struct e di dim
             p = new Elementi[100];
             dim = 0;
+
+            //Riempio la struct con gli elementi presenti nel file suddividendo gli elementi del fil nei rispettivi array della struct
             Riemp(p);
         }
 
@@ -55,41 +61,49 @@ namespace Elaborazione_dati_CSV
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Funzione che mi permette di aggiungere alla fine di ogni record un campo contenente un numero casuale tra 10 e 20
             Aggiunta(p);
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //Funzione che mi permette di ricavare la quantità di campi contenuti in ogni record
             Numcampi(p);
         }
         private void button3_Click_1(object sender, EventArgs e)
         {
+            //Funzione che restituisce il il record con lunghezza massima e il campo con lunghezza massima per tutte le categorie di campo presenti nel file
             lmax = Lunghezzamax(p);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Funzione che mi permette data la lunghezza massima di aggiungere ad ogni record degli spazi vuoti fino ad arrivare alla lunghezza massima in modo da avere tutti i record di lunghezza uguale
             Ridimensione(lmax, p);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //Funzione che mi permette di aggiungere un nuovo record
             Aggiuntarec(p);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //Funzione che mi permette di mostrare 3 campi scelti dall'utente di ogni singolo record
             Visualcampi(p);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //Permette di ricercare un array attraverso un campo chiave
             Ricerca(p);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //Richiamo la funzione
             Modifica(p);
         }
 
@@ -102,38 +116,47 @@ namespace Elaborazione_dati_CSV
 
         public void Riemp(Elementi[] p)
         {
-            StreamReader sw = new StreamReader(path);
-
-            string a = sw.ReadLine();
-
-            dim = 0;
-
-            while (a != null)
+            //Leggo i dati del file
+            using (StreamReader sw = new StreamReader(path))
             {
 
-                string[] campi = a.Split(';');
+                //Salvo il primo record in una stringa
+                string a = sw.ReadLine();
 
-                p[dim].COD_ACQ = campi[0];
-                p[dim].ACQUEDOTTO = campi[1];
-                p[dim].COMUNE = campi[2];
-                p[dim].SIGLA_PROV = campi[3];
-                p[dim].CAP = campi[4];
-                p[dim].DISTRETTO = campi[5];
-                p[dim].COD_PROD = campi[6];
-                p[dim].PRODUTTORE = campi[7];
-                p[dim].LUOGO_PREL = campi[8];
-                p[dim].ETICHETTA = campi[9];
-                p[dim].NOTE = campi[10];
+                //Imposto dim a 0
+                dim = 0;
 
-                a = sw.ReadLine();
+                //Ripetere tutto quello che c'è nel while finchè a ovvero una riga del file risulti vuota
+                while (a != null)
+                {
+                    //Creo un array di stringa temporaneo dove prendo tutti i dati di a ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
+                    string[] campi = a.Split(';');
 
-                dim++;
+                    //Salvo gli elementi in modo sequenziale
+                    p[dim].COD_ACQ = campi[0];
+                    p[dim].ACQUEDOTTO = campi[1];
+                    p[dim].COMUNE = campi[2];
+                    p[dim].SIGLA_PROV = campi[3];
+                    p[dim].CAP = campi[4];
+                    p[dim].DISTRETTO = campi[5];
+                    p[dim].COD_PROD = campi[6];
+                    p[dim].PRODUTTORE = campi[7];
+                    p[dim].LUOGO_PREL = campi[8];
+                    p[dim].ETICHETTA = campi[9];
+                    p[dim].NOTE = campi[10];
+
+                    //Leggo la riga successiva e ripeto il procedimento while fino a una riga vuota
+                    a = sw.ReadLine();
+
+                    //Aumento dim di uno per spostarmi di posizione dell'array
+                    dim++;
+                }
+
             }
-
-            sw.Close();
 
         }
 
+        //Funzione che ricompone gli elementi della struct della stessa posizione dei rispettivi array in un unica stringa
         public string Str(Elementi[] p, int dim)
         {
             return p[dim].COD_ACQ + ";" + p[dim].ACQUEDOTTO + ";" + p[dim].COMUNE + ";" + p[dim].SIGLA_PROV + ";" + p[dim].CAP + ";" + p[dim].DISTRETTO + ";" + p[dim].COD_PROD + ";" + p[dim].PRODUTTORE + ";" + p[dim].LUOGO_PREL + ";" + p[dim].ETICHETTA + ";" + p[dim].NOTE;
@@ -141,36 +164,38 @@ namespace Elaborazione_dati_CSV
 
         public void Aggiunta(Elementi[] p)
         {
-
+            //Dichiaro la variabil per i numeri random
             Random num = new Random();
 
-            StreamWriter sw = new StreamWriter(path);
-
-            int b = 0;
-            dim = 0;
-
-            while (p[dim].COD_ACQ != null)
+            //Apro il file in lettura
+            using (StreamWriter sw = new StreamWriter(path))
             {
-                int a = num.Next(10, 21);
+                //Setto le variabili dim e b a 0
+                int b = 0;
+                dim = 0;
 
-                if (dim == 0)
+                while (p[dim].COD_ACQ != null)
                 {
-                    p[dim].Casual = "miovalore";
-                }
-                else
-                {
-                    p[dim].Casual = a.ToString();
-                }
+                    int a = num.Next(10, 21);
 
-                string d = Str(p, dim) + ";" + p[dim].Casual;
+                    if (dim == 0)
+                    {
+                        p[dim].Casual = "miovalore";
+                    }
+                    else
+                    {
+                        p[dim].Casual = a.ToString();
+                    }
 
-                sw.WriteLine(d);
-                b++;
-                dim++;
+                    string d = Str(p, dim) + ";" + p[dim].Casual;
+
+                    sw.WriteLine(d);
+                    b++;
+                    dim++;
+
+                }
 
             }
-
-            sw.Close();
         }
 
         public void Numcampi(Elementi[] p)
@@ -418,7 +443,7 @@ namespace Elaborazione_dati_CSV
 
         public void Aggiuntarec(Elementi[] p)
         {
-            int O = 1;
+            int r = 0;
 
             using (StreamReader sw = new StreamReader(path))
             {
@@ -434,48 +459,56 @@ namespace Elaborazione_dati_CSV
 
                 while (C == 0)
                 {
-                    string a = sw.ReadLine();
-
-                    if (a != null)
+                    if (dim != 100)
                     {
-                        dim++;
-                    }
+                        string a = sw.ReadLine();
 
-                    if (dim == 99)
-                    {
-                        O = 0;
+                        if (a != null)
+                        {
+                            dim++;
+                        }
+                        else
+                        {
+                            p[dim].COD_ACQ = campi[0];
+                            p[dim].ACQUEDOTTO = campi[1];
+                            p[dim].COMUNE = campi[2];
+                            p[dim].SIGLA_PROV = campi[3];
+                            p[dim].CAP = campi[4];
+                            p[dim].DISTRETTO = campi[5];
+                            p[dim].COD_PROD = campi[6];
+                            p[dim].PRODUTTORE = campi[7];
+                            p[dim].LUOGO_PREL = campi[8];
+                            p[dim].ETICHETTA = campi[9];
+                            p[dim].NOTE = campi[10];
+
+                            C = 1;
+                        }
+
                     }
                     else
                     {
-                        p[dim].COD_ACQ = campi[0];
-                        p[dim].ACQUEDOTTO = campi[1];
-                        p[dim].COMUNE = campi[2];
-                        p[dim].SIGLA_PROV = campi[3];
-                        p[dim].CAP = campi[4];
-                        p[dim].DISTRETTO = campi[5];
-                        p[dim].COD_PROD = campi[6];
-                        p[dim].PRODUTTORE = campi[7];
-                        p[dim].LUOGO_PREL = campi[8];
-                        p[dim].ETICHETTA = campi[9];
-                        p[dim].NOTE = campi[10];
-
-                        C = 1;
+                        r = 1;
+                        break;
                     }
+                    
                 }
             }
 
 
             using (StreamWriter sw = new StreamWriter(path, true))
             {
-                if (O == 0)
+                if (r == 1)
                 {
                     listView1.Clear();
-                    listView1.Items.Add("Impossibile inserire un record, il file è pieno");
+                    listView1.Items.Add("Impossibile aggiungere un record il file è pieno");
                 }
                 else
                 {
+
                     sw.WriteLine(Str(p, dim));
+
                 }
+                
             }
 
         }
