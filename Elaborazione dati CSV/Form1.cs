@@ -74,8 +74,8 @@ namespace Elaborazione_dati_CSV
         }
 
         private void button6_Click(object sender, EventArgs e)
-        { 
-            Aggiuntarec(p); 
+        {
+            Aggiuntarec(p);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -141,7 +141,7 @@ namespace Elaborazione_dati_CSV
 
         public void Aggiunta(Elementi[] p)
         {
-            
+
             Random num = new Random();
 
             StreamWriter sw = new StreamWriter(path);
@@ -153,14 +153,14 @@ namespace Elaborazione_dati_CSV
             {
                 int a = num.Next(10, 21);
 
-                if(dim == 0)
+                if (dim == 0)
                 {
                     p[dim].Casual = "miovalore";
                 }
                 else
                 {
                     p[dim].Casual = a.ToString();
-                }                
+                }
 
                 string d = Str(p, dim) + ";" + p[dim].Casual;
 
@@ -179,7 +179,7 @@ namespace Elaborazione_dati_CSV
 
             dim = 0;
 
-            for (int i=0; i<p.Length; i++)
+            for (int i = 0; i < p.Length; i++)
             {
                 int a = 0;
 
@@ -238,7 +238,7 @@ namespace Elaborazione_dati_CSV
                     a++;
                 }
 
-                
+
                 listView1.Items.Add("Campi riga: " + a);
                 dim++;
 
@@ -277,7 +277,7 @@ namespace Elaborazione_dati_CSV
                         a = b;
                     }
 
-                    if ((p[dim].COD_ACQ).Length < (p[dim+1].COD_ACQ).Length)
+                    if ((p[dim].COD_ACQ).Length < (p[dim + 1].COD_ACQ).Length)
                     {
                         q = p[dim + 1].COD_ACQ;
                     }
@@ -333,7 +333,7 @@ namespace Elaborazione_dati_CSV
                     }
                     else
                     {
-                        if ((p[dim].Casual).Length < (p[dim + 1].Casual).Length )
+                        if ((p[dim].Casual).Length < (p[dim + 1].Casual).Length)
                         {
                             k = p[dim + 1].Casual;
                         }
@@ -374,34 +374,34 @@ namespace Elaborazione_dati_CSV
 
             StreamReader sw = new StreamReader(path);
 
-                    string a = sw.ReadLine();
+            string a = sw.ReadLine();
 
-                    while (a != null)
+            while (a != null)
+            {
+                if (p[dim].COD_ACQ != null)
+                {
+                    int d = lung - a.Length;
+
+                    string f = "";
+
+                    for (int i = 0; i < d; i++)
                     {
-                        if (p[dim].COD_ACQ != null)
-                        {
-                            int d = lung - a.Length;
+                        f = f + " ";
+                    }
 
-                            string f = "";
+                    supp[dim] = a + f;
 
-                            for (int i = 0; i < d; i++)
-                            {
-                                f = f + " ";
-                            }
-
-                            supp[dim] = a + f;
-
-                        }
+                }
 
                 a = sw.ReadLine();
                 dim++;
-                    }
-                
-                 sw.Close();
+            }
+
+            sw.Close();
 
             StreamWriter sw2 = new StreamWriter(path);
 
-            dim= 0;
+            dim = 0;
 
             sw2.WriteLine(supp[dim]);
 
@@ -418,50 +418,68 @@ namespace Elaborazione_dati_CSV
 
         public void Aggiuntarec(Elementi[] p)
         {
-                using (StreamReader sw = new StreamReader(path))
-                {
+            int O = 1;
 
-                    string b = textBox1.Text;
+            using (StreamReader sw = new StreamReader(path))
+            {
 
-                    string[] campi = b.Split(';');
+
+                string b = textBox1.Text;
+
+                string[] campi = b.Split(';');
 
                 dim = 0;
 
-                    int C = 0;
+                int C = 0;
 
-                    while (C == 0)
+                while (C == 0)
+                {
+                    string a = sw.ReadLine();
+
+                    if (a != null)
                     {
-                          string a = sw.ReadLine();
+                        dim++;
+                    }
 
-                        if(a != null)
-                        {
-                            dim++;
-                        }
-                        else
-                        {
-                            p[dim].COD_ACQ = campi[0];
-                            p[dim].ACQUEDOTTO = campi[1];
-                            p[dim].COMUNE = campi[2];
-                            p[dim].SIGLA_PROV = campi[3];
-                            p[dim].CAP = campi[4];
-                            p[dim].DISTRETTO = campi[5];
-                            p[dim].COD_PROD = campi[6];
-                            p[dim].PRODUTTORE = campi[7];
-                            p[dim].LUOGO_PREL = campi[8];
-                            p[dim].ETICHETTA = campi[9];
-                            p[dim].NOTE = campi[10];
+                    if (dim == 99)
+                    {
+                        O = 0;
+                    }
+                    else
+                    {
+                        p[dim].COD_ACQ = campi[0];
+                        p[dim].ACQUEDOTTO = campi[1];
+                        p[dim].COMUNE = campi[2];
+                        p[dim].SIGLA_PROV = campi[3];
+                        p[dim].CAP = campi[4];
+                        p[dim].DISTRETTO = campi[5];
+                        p[dim].COD_PROD = campi[6];
+                        p[dim].PRODUTTORE = campi[7];
+                        p[dim].LUOGO_PREL = campi[8];
+                        p[dim].ETICHETTA = campi[9];
+                        p[dim].NOTE = campi[10];
 
-                            C = 1;
-                        }
+                        C = 1;
                     }
                 }
+            }
 
-                using(StreamWriter sw = new StreamWriter(path,true))
+
+            using (StreamWriter sw = new StreamWriter(path, true))
+            {
+                if (O == 0)
                 {
-                    sw.WriteLine(Str(p,dim));
+                    listView1.Clear();
+                    listView1.Items.Add("Impossibile inserire un record, il file è pieno");
                 }
-            
+                else
+                {
+                    sw.WriteLine(Str(p, dim));
+                }
+            }
+
         }
+
 
         public void Visualcampi(Elementi[]p)
         {
@@ -513,9 +531,62 @@ namespace Elaborazione_dati_CSV
                 {
                     string[] campi = a.Split(';');
 
-                    listView1.Items.Add("Campo 1: " + campi[v]);
-                    listView1.Items.Add("Campo 2: " + campi[b]);
-                    listView1.Items.Add("Campo 3: " + campi[c]);
+                    
+                        if (campi[v] == null)
+                        {
+                            listView1.Items.Add("Campo " + textBox2.Text + ": ");
+                        }
+                        else
+                        {
+                            if (textBox2.Text != "")
+                            {
+                                listView1.Items.Add("Campo " + textBox2.Text + ": " + campi[v]);
+                            }
+                            else
+                            {
+                                  listView1.Items.Add("Campo 1: ");
+                            }
+                        }
+                    
+
+                        if (campi[b] == null)
+                        {
+                            listView1.Items.Add("Campo " + textBox3.Text + ": ");
+                        }
+                        else
+                        {
+                            if (textBox3.Text != "")
+                            {
+
+                                listView1.Items.Add("Campo " + textBox3.Text + ": " + campi[b]);
+
+                            }
+                            else
+                            {
+                                listView1.Items.Add("Campo " + textBox3.Text + ": ");
+                            }
+                        }
+
+
+                    
+                        if (campi[c] == null)
+                        {
+                            listView1.Items.Add("Campo " + textBox4.Text + ": ");
+                        }
+                        else
+                        {
+                            if (textBox4.Text != null)
+                            {
+
+                            listView1.Items.Add("Campo " + textBox4.Text + ": " + campi[c]);
+
+                            }
+                            else
+                            {
+                                listView1.Items.Add("Campo " + textBox4.Text + ": ");
+                            }
+                        }
+
                     listView1.Items.Add("");
 
                     a = sr.ReadLine();
@@ -609,7 +680,6 @@ namespace Elaborazione_dati_CSV
                                         }
                                     }
 
-                                    
                                     j = 0;
                                     break;
                                 }
@@ -633,6 +703,11 @@ namespace Elaborazione_dati_CSV
                     }
 
                     
+                }
+
+                if (c == null)
+                {
+                        c = "Per il campo inserito non esiste un record che ne contenga uno univoco";
                 }
 
                 listView1.Clear();
@@ -693,7 +768,7 @@ namespace Elaborazione_dati_CSV
                 {
                     string t = Str(p, dim);
 
-                    if (t!= ";;;;;;;;;;")
+                    if (t != ";;;;;;;;;;")
                     {
                         sw2.WriteLine(t);
 
