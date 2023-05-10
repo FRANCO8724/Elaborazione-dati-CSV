@@ -29,13 +29,14 @@ namespace Elaborazione_dati_CSV
             public string ETICHETTA;
             public string NOTE;
             public string Casual;
+            public bool a;
         }
 
         //Rendo gli elementi richiamabili in ogni parte del codice
         public Elementi[] p;
         public int dim;
         public int lmax;
-        public string path = @"C:\Users\39370\Source\Repos\Elaborazione-dati-CSV\Elaborazione dati CSV\Arrigoni.csv";
+        public string path = @"Arrigoni.csv";
 
         public Form1()
         {
@@ -109,7 +110,7 @@ namespace Elaborazione_dati_CSV
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            Cancelalog(p);
         }
 
         //Funzioni di servizio
@@ -144,6 +145,8 @@ namespace Elaborazione_dati_CSV
                     p[dim].LUOGO_PREL = campi[8];
                     p[dim].ETICHETTA = campi[9];
                     p[dim].NOTE = campi[10];
+                    p[dim].a = true;
+
 
                     //Leggo la riga successiva e ripeto il procedimento while fino a una riga vuota
                     a = sw.ReadLine();
@@ -938,5 +941,54 @@ namespace Elaborazione_dati_CSV
             }//Chiusura file
         }
 
+        public void Cancelalog(Elementi[] p)
+        {
+            //Imposto dim a 0
+            dim = 0;
+                
+            //Ciclo che scorre tutta la struct e in caso il COD_ACQ corrisponde al dato che l'utente vuole eliminare cambio l'elemento dell'array della struct da true a false e aumento dim
+            for(int y = 0; y < p.Length; y++)
+            {
+
+                if (p[y].COD_ACQ == textBox8.Text)
+                {
+                    p[dim].a = false;
+                }
+
+                dim++;
+
+            }
+
+            //Imposto dim a 0
+            dim = 0;
+
+            //Variabile di supporto
+            int e = 0;
+
+            using(StreamWriter sw = new StreamWriter(path))
+            {
+                //Mentre e = 0 ricomponi il record della struct in caso non sia vuota e in caso l'utlimo array dell astruct contenga il valore true scrivi record su file altrimenti se il record è vuoto rompi while
+                while (e == 0)
+                {
+                    string h = Str(p, dim);
+
+                    if (h != ";;;;;;;;;;")
+                    {
+                        if (p[dim].a == true)
+                        {
+                            sw.WriteLine(h);
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    //Aumento dim
+                    dim++;
+                    
+                }
+            }
+        }
+        
     }
 }
