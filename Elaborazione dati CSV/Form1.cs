@@ -88,29 +88,56 @@ namespace Elaborazione_dati_CSV
         {
             //Funzione che mi permette di aggiungere un nuovo record
             Aggiuntarec(p);
+
+            //Finita la funzione ripulisco la box 1
+            textBox1.Text = "";
+            textBox1.Focus();
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             //Funzione che mi permette di mostrare 3 campi scelti dall'utente di ogni singolo record
             Visualcampi(p);
+
+            //Finita la funzione ripulisco la box 2,3,4
+            textBox2.Text = "";
+            textBox2.Focus();
+            textBox3.Text = "";
+            textBox3.Focus();
+            textBox4.Text = "";
+            textBox4.Focus();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //Permette di ricercare un array attraverso un campo chiave
             Ricerca(p);
+
+            //Finita la funzione ripulisco la box 5
+            textBox5.Text = "";
+            textBox5.Focus();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //Richiamo la funzione
             Modifica(p);
+
+            //Finita la funzione ripulisco la box 6,7
+            textBox6.Text = "";
+            textBox6.Focus();
+            textBox7.Text = "";
+            textBox7.Focus();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             Cancelalog(p);
+
+            //Finita la funzione ripulisco la box 8
+            textBox8.Text = "";
+            textBox8.Focus();
         }
 
         //Funzioni di servizio
@@ -145,6 +172,7 @@ namespace Elaborazione_dati_CSV
                     p[dim].LUOGO_PREL = campi[8];
                     p[dim].ETICHETTA = campi[9];
                     p[dim].NOTE = campi[10];
+                    p[dim].Casual = "";
                     p[dim].a = true;
 
 
@@ -514,47 +542,55 @@ namespace Elaborazione_dati_CSV
                 //Variabile di supporto impostata a 0
                 int C = 0;
 
-                //Eseguo il ciclo while finchè C è diverso da 0
-                while (C == 0)
+                if (textBox1.Text != "")
                 {
-                    if (dim != 100)
+                    //Eseguo il ciclo while finchè C è diverso da 0
+                    while (C == 0)
                     {
-                        //Leggo la riga del file
-                        string a = sw.ReadLine();
-
-                        //Se la riga del file non  è vuota esegui if
-                        if (a != null)
+                        if (dim != 100)
                         {
-                            //Aumenta dim di uno
-                            dim++;
+                            //Leggo la riga del file
+                            string a = sw.ReadLine();
+
+                            //Se la riga del file non  è vuota esegui if
+                            if (a != null)
+                            {
+                                //Aumenta dim di uno
+                                dim++;
+                            }
+                            else
+                            {
+                                //In caso la riga del file sia vuota salvo gli elementi negli array della struct nelle rispettive posizioni
+                                p[dim].COD_ACQ = campi[0];
+                                p[dim].ACQUEDOTTO = campi[1];
+                                p[dim].COMUNE = campi[2];
+                                p[dim].SIGLA_PROV = campi[3];
+                                p[dim].CAP = campi[4];
+                                p[dim].DISTRETTO = campi[5];
+                                p[dim].COD_PROD = campi[6];
+                                p[dim].PRODUTTORE = campi[7];
+                                p[dim].LUOGO_PREL = campi[8];
+                                p[dim].ETICHETTA = campi[9];
+                                p[dim].NOTE = campi[10];
+
+                                //Imposto C a 1 per rompere il while;
+                                C = 1;
+                            }
+
                         }
                         else
                         {
-                            //In caso la riga del file sia vuota salvo gli elementi negli array della struct nelle rispettive posizioni
-                            p[dim].COD_ACQ = campi[0];
-                            p[dim].ACQUEDOTTO = campi[1];
-                            p[dim].COMUNE = campi[2];
-                            p[dim].SIGLA_PROV = campi[3];
-                            p[dim].CAP = campi[4];
-                            p[dim].DISTRETTO = campi[5];
-                            p[dim].COD_PROD = campi[6];
-                            p[dim].PRODUTTORE = campi[7];
-                            p[dim].LUOGO_PREL = campi[8];
-                            p[dim].ETICHETTA = campi[9];
-                            p[dim].NOTE = campi[10];
-
-                            //Imposto C a 1 per rompere il while;
-                            C = 1;
+                            //In caso dim arrivi a 100 ovvero grandezza massima del file imposto r a 1 e rompo il while
+                            r = 1;
+                            break;
                         }
 
                     }
-                    else
-                    {
-                        //In caso dim arrivi a 100 ovvero grandezza massima del file imposto r a 1 e rompo il while
-                        r = 1;
-                        break;
-                    }
-                    
+                }
+                else
+                {
+                    listView1.Clear();
+                    listView1.Items.Add("Inserire un valore valido");
                 }
             }//Chiusura file
 
@@ -638,64 +674,88 @@ namespace Elaborazione_dati_CSV
                     //Se l'elemento è nullo lo scrivo
                         if (campi[v] == null)
                         {
-                            listView1.Items.Add("Campo " + textBox2.Text + ": ");
+                            listView1.Items.Add("Campo 1: ");
                         }
                         else
+                        {
+
+                        if (textBox2.Text != "miovalore")
                         {
                             //Stampo sulla listView il campo
                             if (textBox2.Text != "")
                             {
-                                listView1.Items.Add("Campo " + textBox2.Text + ": " + campi[v]);
+                                listView1.Items.Add("Campo 1: " + campi[v]);
                             }
                             else
                             {
-                            //altrimenti Se l'utente non ha inserito niente in una delle tre box scrivo semplicemente campo senza elemento
-                            listView1.Items.Add("Campo 1: ");
+                                //altrimenti Se l'utente non ha inserito niente in una delle tre box scrivo semplicemente campo senza elemento
+                                listView1.Items.Add("Campo 1: ");
                             }
-                        }
-
-                    //Se l'elemento è nullo lo scrivo
-                    if (campi[b] == null)
-                        {
-                            listView1.Items.Add("Campo " + textBox3.Text + ": ");
                         }
                         else
                         {
-                        //Stampo sulla listView il campo
-                        if (textBox3.Text != "")
+                            listView1.Items.Add("Campo 1: " + campi[v]);
+                        }
+
+                        }
+
+                    //Se l'elemento è nullo lo scrivo
+                        if (campi[b] == null)
+                        {
+                            listView1.Items.Add("Campo 2: ");
+                        }
+                        else
+                        {
+                        if (textBox3.Text != "miovalore")
+                        {
+                            //Stampo sulla listView il campo
+                            if (textBox3.Text != "")
                             {
 
-                                listView1.Items.Add("Campo " + textBox3.Text + ": " + campi[b]);
+                                listView1.Items.Add("Campo 2: " + campi[b]);
 
                             }
                             else
                             {
-                            //altrimenti Se l'utente non ha inserito niente in una delle tre box scrivo semplicemente campo senza elemento
-                            listView1.Items.Add("Campo " + textBox3.Text + ": ");
+                                //altrimenti Se l'utente non ha inserito niente in una delle tre box scrivo semplicemente campo senza elemento
+                                listView1.Items.Add("Campo 2: ");
                             }
+                        }
+                        else
+                        {
+                            listView1.Items.Add("Campo 2: " + campi[b]);
+                        }
                         }
 
 
                     //Se l'elemento è nullo lo scrivo
                     if (campi[c] == null)
+                    {
+                        listView1.Items.Add("Campo 3: ");
+                    }
+                    else
+                    {
+                        if (textBox4.Text != "miovalore")
                         {
-                            listView1.Items.Add("Campo " + textBox4.Text + ": ");
-                        }
-                        else
-                        {
-                        //Stampo sulla listView il campo
-                        if (textBox4.Text != null)
+                            //Stampo sulla listView il campo
+                            if (textBox4.Text != "")
                             {
 
-                            listView1.Items.Add("Campo " + textBox4.Text + ": " + campi[c]);
+                                listView1.Items.Add("Campo 3: " + campi[c]);
 
                             }
                             else
                             {
-                            //altrimenti Se l'utente non ha inserito niente in una delle tre box scrivo semplicemente campo senza elemento
-                            listView1.Items.Add("Campo " + textBox4.Text + ": ");
+                                //altrimenti Se l'utente non ha inserito niente in una delle tre box scrivo semplicemente campo senza elemento
+                                listView1.Items.Add("Campo 3: ");
                             }
+                        }
+                        else
+                        {
+                            listView1.Items.Add("Campo 3: " + campi[c]);
+                        }
                     }
+                    
 
                     //Spazio per dividere i campi di ogni struct sulla listView1
                     listView1.Items.Add("");
@@ -716,147 +776,54 @@ namespace Elaborazione_dati_CSV
             //Variabile di supporto impostata a 0
             int v = 0;
 
+            int a = 0;
+
             //Apro il file in lettura
             using (StreamReader sw = new StreamReader(path))
             {
-                //Leggo la riga del file
-                string s = sw.ReadLine();
-
-                //Creo un array di stringa temporaneo dove prendo tutti i dati di s ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
-                string[] campi = s.Split(';');
-
-                //Funzione che mi permette di ricavare la posizione del campo appartenente al record che l'utente vuole ricavare
-                for (int i = 0; i < campi.Length; i++)
+                    //Leggo la riga del file
+                    string s = sw.ReadLine();
+                if (textBox5.Text != "")
                 {
-
-                    if (campi[i] == textBox5.Text)
+                    while (s != null)
                     {
-                        v = i;
-                    }
+                        //Creo un array di stringa temporaneo dove prendo tutti i dati di s ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
+                        string[] campi = s.Split(';');
 
-                }
-
-            }//Chiusura file
-
-            //Apro file in lettura
-            using (StreamReader sr = new StreamReader(path))
-            {
-                //Leggo riga del file
-                string a = sr.ReadLine();
-
-                //Array di supporto
-               string[] n = new string[100];
-
-                //Variabile di supporto che è uguale a ""
-                string c = "";
-
-                //Variabile di supporto uguale a 0
-                int i = 0;
-
-                //Mentre la riga non è vuota
-                while (a != null)
-                {
-                    //Creo un array di stringa temporaneo dove prendo tutti i dati di a ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
-                    string[] campi = a.Split(';');
-
-                    //Salvo nell'array i valori del campo selezionato appartenente ai record del file
-                    n[i] = campi[v];
-
-                    //Leggo la riga successiva delfile
-                    a = sr.ReadLine();
-
-                    //Aumenmto i di 1
-                    i++;
-                }
-
-                //Variabile di supporto uguale a 0
-                int cont2 = 0;
-
-                //Variabile di supporto uguale a 1
-                int j = 1;
-
-                //Ripeto per tante volte quanto è la grandezza dell' array di n
-                for (int f = 1; f < n.Length; f++)
-                {
-                    //Variabile di supporto impostata a 0
-                    int cont = 0;
-
-                    //Imposto c = agli elementi dell array n
-                    c = n[f];
-
-                 //Se c non è nulla esegui if
-                    if(c!=null)
-                    {
-                        //Esegui il while in continuazione finchè cont2 è uguale a 0
-                        while (cont2 == 0)
+                        //Funzione che mi permette di ricavare la posizione del campo appartenente al record che l'utente vuole ricavare
+                        for (int i = 0; i < campi.Length; i++)
                         {
-                            //Se c è diverso dall'elemento nell' array n aumento cont di uno
-                            if (c != n[j])
-                            {
-                                cont++;
-                            }
 
-                            //Se c e l'elemento dell'array di n sono uguali esegui questo if
-                            if (c == n[j])
+                            if (campi[i] == textBox5.Text)
                             {
-                                //Se gli indici sono uguali ovvero f e j ci troviamo in presenza dello stesso elemento
-                                if (f == j)
-                                {
-                                    cont++;
-                                }
-                                //Se gli indici sono diversi ovvero f e j ci troviamo in presenza di elementi differenti in quanto sono in posizioni differenti fra di loro nei loro rispettivi array
-                                else
-                                {
-                                    //Elimino tutti gli elementi uguali al campo inserito dall'utente
-                                    for(int l=0;l<n.Length;l++)
-                                    {
-                                        if (n[l] == textBox5.Text)
-                                        {
-                                            n[l] = null;
-                                        }
-                                    }
-
-                                    //Imposto j a 0 e rompo il while
-                                    j = 0;
-                                    break;
-                                }
-                            }
-
-                            //Se il cont arriva alla dimensioni di i rompi il while
-                            if (cont == i-1)
-                            {
+                                a = 1;
                                 break;
                             }
 
-                            //Aumenta variabile j di uno
-                            j++;
                         }
 
-                        
-                            
+                        if (a == 1)
+                        {
+                            break;
+                        }
+
+                        dim++;
+
+                        s = sw.ReadLine();
                     }
 
-                    //Se il cont arriva alla dimensioni di i rompi il for
-                    if (cont == i-1)
-                    {
-                        break;
-                    }
-
-                    
+                    listView1.Clear();
+                    listView1.Items.Add(Str(p, dim));
                 }
-
-                //Se c è nullo vuol dire che non esiste all'interno del file un record che si ripeta una sola volta
-                if (c == null)
+                else
                 {
-                        c = "Per il campo inserito non esiste un record che ne contenga uno univoco";
+                    listView1.Clear();
+                    listView1.Items.Add("Dato inserito non valido");
                 }
 
-                //Pulisco listVie1 e stampo c
-                listView1.Clear();
-                listView1.Items.Add(c);
+                
 
             }//Chiusura file
-
 
         }
 
@@ -865,128 +832,144 @@ namespace Elaborazione_dati_CSV
             //Salvo il datio inserito dall'utente contenente il record da modificare
             string a = textBox6.Text;
 
-            //Imposto dim a 0
-            dim = 0;
-
-            //Apro il file in lettura
-            using (StreamReader sw = new StreamReader(path))
-            {
-                //Leggo la riga
-                string b = sw.ReadLine();
-
-                //Se la riga non è vuota eseguo continuamente il while
-                while (b != null)
-                {
-                    //Creo un array di stringa temporaneo dove prendo tutti i dati di b ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
-                    string[] campi2 = b.Split(';');
-
-                    //Se il valore dell'elemento del campo campo in posizione 0 è uguale ad a rompi il while
-                    if (campi2[0] == a)
-                    {
-                        break;
-                    }
-                    //In caso contrario aumenta dim di 1
-                    else
-                    {
-                        dim++;
-                    }
-
-                    //Leggi riga successiva
-                    b = sw.ReadLine();
-                }
-
-                //Creo un array di stringa temporaneo dove prendo tutti i dati di b ovvero del record inserito dall'utente, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
-                string[] campi = (textBox7.Text).Split(';');
-
-                //Salvo gli elementi nelle rispettive posizioni degli array appartenente alla struct
-                p[dim].COD_ACQ = campi[0];
-                p[dim].ACQUEDOTTO = campi[1];
-                p[dim].COMUNE = campi[2];
-                p[dim].SIGLA_PROV = campi[3];
-                p[dim].CAP = campi[4];
-                p[dim].DISTRETTO = campi[5];
-                p[dim].COD_PROD = campi[6];
-                p[dim].PRODUTTORE = campi[7];
-                p[dim].LUOGO_PREL = campi[8];
-                p[dim].ETICHETTA = campi[9];
-                p[dim].NOTE = campi[10];  
-
-            }//Chiusura file
-
-            //Apertura file in scrittura
-            using(StreamWriter sw2 = new StreamWriter(path))
+            if (a != "")
             {
                 //Imposto dim a 0
                 dim = 0;
 
-                //Ripeto per tutta la lunghezza della struct
-                for (int y = 0; y < p.Length; y++)
+                //Apro il file in lettura
+                using (StreamReader sw = new StreamReader(path))
                 {
-                    //Ricompongo il record
-                    string t = Str(p, dim);
+                    //Leggo la riga
+                    string b = sw.ReadLine();
 
-                    //Se il record non contiene campi vuoti stampa sul file la stringa t e aumenta dim di uno
-                    if (t != ";;;;;;;;;;")
+                    //Se la riga non è vuota eseguo continuamente il while
+                    while (b != null)
                     {
-                        sw2.WriteLine(t);
+                        //Creo un array di stringa temporaneo dove prendo tutti i dati di b ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
+                        string[] campi2 = b.Split(';');
 
-                        dim++;
+                        //Se il valore dell'elemento del campo campo in posizione 0 è uguale ad a rompi il while
+                        if (campi2[0] == a)
+                        {
+                            break;
+                        }
+                        //In caso contrario aumenta dim di 1
+                        else
+                        {
+                            dim++;
+                        }
+
+                        //Leggi riga successiva
+                        b = sw.ReadLine();
                     }
-                    //Altrimenti rompi il for
-                    else
+
+                    //Creo un array di stringa temporaneo dove prendo tutti i dati di b ovvero del record inserito dall'utente, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
+                    string[] campi = (textBox7.Text).Split(';');
+
+                    //Salvo gli elementi nelle rispettive posizioni degli array appartenente alla struct
+                    p[dim].COD_ACQ = campi[0];
+                    p[dim].ACQUEDOTTO = campi[1];
+                    p[dim].COMUNE = campi[2];
+                    p[dim].SIGLA_PROV = campi[3];
+                    p[dim].CAP = campi[4];
+                    p[dim].DISTRETTO = campi[5];
+                    p[dim].COD_PROD = campi[6];
+                    p[dim].PRODUTTORE = campi[7];
+                    p[dim].LUOGO_PREL = campi[8];
+                    p[dim].ETICHETTA = campi[9];
+                    p[dim].NOTE = campi[10];
+
+                }//Chiusura file
+
+                //Apertura file in scrittura
+                using (StreamWriter sw2 = new StreamWriter(path))
+                {
+                    //Imposto dim a 0
+                    dim = 0;
+
+                    //Ripeto per tutta la lunghezza della struct
+                    for (int y = 0; y < p.Length; y++)
                     {
-                        break;
+                        //Ricompongo il record
+                        string t = Str(p, dim);
+
+                        //Se il record non contiene campi vuoti stampa sul file la stringa t e aumenta dim di uno
+                        if (t != ";;;;;;;;;;")
+                        {
+                            sw2.WriteLine(t);
+
+                            dim++;
+                        }
+                        //Altrimenti rompi il for
+                        else
+                        {
+                            break;
+                        }
                     }
-                }
-            }//Chiusura file
+                }//Chiusura file
+            }
+            else
+            {
+                listView1.Clear();
+                listView1.Items.Add("Inserire un dato valido");
+            }
         }
 
         public void Cancelalog(Elementi[] p)
         {
             //Imposto dim a 0
             dim = 0;
-                
-            //Ciclo che scorre tutta la struct e in caso il COD_ACQ corrisponde al dato che l'utente vuole eliminare cambio l'elemento dell'array della struct da true a false e aumento dim
-            for(int y = 0; y < p.Length; y++)
+
+            if (textBox8.Text != "")
             {
-
-                if (p[y].COD_ACQ == textBox8.Text)
+                //Ciclo che scorre tutta la struct e in caso il COD_ACQ corrisponde al dato che l'utente vuole eliminare cambio l'elemento dell'array della struct da true a false e aumento dim
+                for (int y = 0; y < p.Length; y++)
                 {
-                    p[dim].a = false;
-                }
 
-                dim++;
-
-            }
-
-            //Imposto dim a 0
-            dim = 0;
-
-            //Variabile di supporto
-            int e = 0;
-
-            using(StreamWriter sw = new StreamWriter(path))
-            {
-                //Mentre e = 0 ricomponi il record della struct in caso non sia vuota e in caso l'utlimo array dell astruct contenga il valore true scrivi record su file altrimenti se il record è vuoto rompi while
-                while (e == 0)
-                {
-                    string h = Str(p, dim);
-
-                    if (h != ";;;;;;;;;;")
+                    if (p[y].COD_ACQ == textBox8.Text)
                     {
-                        if (p[dim].a == true)
-                        {
-                            sw.WriteLine(h);
-                        }
+                        p[dim].a = false;
                     }
-                    else
-                    {
-                        break;
-                    }
-                    //Aumento dim
+
                     dim++;
-                    
+
                 }
+
+                //Imposto dim a 0
+                dim = 0;
+
+                //Variabile di supporto
+                int e = 0;
+
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    //Mentre e = 0 ricomponi il record della struct in caso non sia vuota e in caso l'utlimo array dell astruct contenga il valore true scrivi record su file altrimenti se il record è vuoto rompi while
+                    while (e == 0)
+                    {
+                        string h = Str(p, dim);
+
+                        if (h != ";;;;;;;;;;")
+                        {
+                            if (p[dim].a == true)
+                            {
+                                sw.WriteLine(h);
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        //Aumento dim
+                        dim++;
+
+                    }
+                }
+            }
+            else
+            {
+                listView1.Clear();
+                listView1.Items.Add("Inserire un dato valido");
             }
         }
         
