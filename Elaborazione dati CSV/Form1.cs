@@ -195,6 +195,9 @@ namespace Elaborazione_dati_CSV
 
         public void Aggiunta(Elementi[] p)
         {
+            //Pulisco la listView1
+            listView1.Clear();
+
             //Dichiaro la variabil per i numeri random
             Random num = new Random();
 
@@ -461,6 +464,9 @@ namespace Elaborazione_dati_CSV
 
         public void Ridimensione(int lung, Elementi[] p)
         {
+            //Pulisco la listView1
+            listView1.Clear();
+
             //Imposto dim a 0
             dim = 0;
 
@@ -638,10 +644,12 @@ namespace Elaborazione_dati_CSV
                     if (campi[i] == textBox2.Text)
                     {
                         v = i;
+
                     }
                     if (campi[i] == textBox3.Text)
                     {
                         b = i;
+
                     }
                     if (campi[i] == textBox4.Text)
                     {
@@ -672,14 +680,13 @@ namespace Elaborazione_dati_CSV
                     string[] campi = a.Split(';');
 
                     //Se l'elemento è nullo lo scrivo
+                    if (textBox2.Text != "miovalore")
+                    {
                         if (campi[v] == null)
                         {
                             listView1.Items.Add("Campo 1: ");
                         }
                         else
-                        {
-
-                        if (textBox2.Text != "miovalore")
                         {
                             //Stampo sulla listView il campo
                             if (textBox2.Text != "")
@@ -692,22 +699,24 @@ namespace Elaborazione_dati_CSV
                                 listView1.Items.Add("Campo 1: ");
                             }
                         }
-                        else
-                        {
-                            listView1.Items.Add("Campo 1: " + campi[v]);
-                        }
+                    }
+                    else
+                    {
+                        listView1.Items.Add("Campo 1: ");
+                    }
 
-                        }
+
 
                     //Se l'elemento è nullo lo scrivo
+                    if (textBox3.Text != "miovalore")
+                    {
                         if (campi[b] == null)
                         {
                             listView1.Items.Add("Campo 2: ");
                         }
                         else
                         {
-                        if (textBox3.Text != "miovalore")
-                        {
+
                             //Stampo sulla listView il campo
                             if (textBox3.Text != "")
                             {
@@ -721,22 +730,24 @@ namespace Elaborazione_dati_CSV
                                 listView1.Items.Add("Campo 2: ");
                             }
                         }
-                        else
-                        {
-                            listView1.Items.Add("Campo 2: " + campi[b]);
-                        }
-                        }
-
-
-                    //Se l'elemento è nullo lo scrivo
-                    if (campi[c] == null)
-                    {
-                        listView1.Items.Add("Campo 3: ");
                     }
                     else
                     {
-                        if (textBox4.Text != "miovalore")
+                        listView1.Items.Add("Campo 2: ");
+                    }
+
+
+
+                    //Se l'elemento è nullo lo scrivo
+                    if (textBox4.Text != "miovalore")
+                    {
+                        if (campi[c] == null)
                         {
+                            listView1.Items.Add("Campo 3: ");
+                        }
+                        else
+                        {
+
                             //Stampo sulla listView il campo
                             if (textBox4.Text != "")
                             {
@@ -750,11 +761,12 @@ namespace Elaborazione_dati_CSV
                                 listView1.Items.Add("Campo 3: ");
                             }
                         }
-                        else
-                        {
-                            listView1.Items.Add("Campo 3: " + campi[c]);
-                        }
                     }
+                    else
+                    {
+                        listView1.Items.Add("Campo 3: ");
+                    }
+                    
                     
 
                     //Spazio per dividere i campi di ogni struct sulla listView1
