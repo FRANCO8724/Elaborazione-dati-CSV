@@ -36,7 +36,7 @@ namespace Elaborazione_dati_CSV
         public Elementi[] p;
         public int dim;
         public int lmax;
-        public string path = @"Arrigoni.csv";
+        public string path = @"../../Arrigoni.csv";
 
         public Form1()
         {
