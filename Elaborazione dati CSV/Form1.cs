@@ -9,6 +9,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Elaborazione_dati_CSV
 {
@@ -157,30 +158,44 @@ namespace Elaborazione_dati_CSV
                 //Ripetere tutto quello che c'è nel while finchè a ovvero una riga del file risulti vuota
                 while (a != null)
                 {
-                    //Creo un array di stringa temporaneo dove prendo tutti i dati di a ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
-                    string[] campi = a.Split(';');
+                    if (a != "")
+                    {
+                        //Creo un array di stringa temporaneo dove prendo tutti i dati di a ovvero della riga del file, prende un dato e ad ogni punto virgola salva i dati letti nell'array in posizioni diverse
+                        string[] campi = a.Split(';');
 
-                    //Salvo gli elementi in modo sequenziale
-                    p[dim].COD_ACQ = campi[0];
-                    p[dim].ACQUEDOTTO = campi[1];
-                    p[dim].COMUNE = campi[2];
-                    p[dim].SIGLA_PROV = campi[3];
-                    p[dim].CAP = campi[4];
-                    p[dim].DISTRETTO = campi[5];
-                    p[dim].COD_PROD = campi[6];
-                    p[dim].PRODUTTORE = campi[7];
-                    p[dim].LUOGO_PREL = campi[8];
-                    p[dim].ETICHETTA = campi[9];
-                    p[dim].NOTE = campi[10];
-                    p[dim].Casual = "";
-                    p[dim].a = true;
+                        //Salvo gli elementi in modo sequenziale
+                        p[dim].COD_ACQ = campi[0];
+                        p[dim].ACQUEDOTTO = campi[1];
+                        p[dim].COMUNE = campi[2];
+                        p[dim].SIGLA_PROV = campi[3];
+                        p[dim].CAP = campi[4];
+                        p[dim].DISTRETTO = campi[5];
+                        p[dim].COD_PROD = campi[6];
+                        p[dim].PRODUTTORE = campi[7];
+                        p[dim].LUOGO_PREL = campi[8];
+                        p[dim].ETICHETTA = campi[9];
+                        p[dim].NOTE = campi[10];
+                        if (campi.Length > 11)
+                        {
+                            p[dim].Casual = campi[11];
+                        }
+                        else
+                        {
+                            p[dim].Casual = "";
+                        }
+                        p[dim].a = true;
 
 
-                    //Leggo la riga successiva e ripeto il procedimento while fino a una riga vuota
-                    a = sw.ReadLine();
+                        //Leggo la riga successiva e ripeto il procedimento while fino a una riga vuota
+                        a = sw.ReadLine();
 
-                    //Aumento dim di uno per spostarmi di posizione dell'array
-                    dim++;
+                        //Aumento dim di uno per spostarmi di posizione dell'array
+                        dim++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
             }//Chiusura file
@@ -702,7 +717,16 @@ namespace Elaborazione_dati_CSV
                     }
                     else
                     {
-                        listView1.Items.Add("Campo 1: ");
+                        //In cui l'utente richieda mio valore e ci sono dei valori gli stampo altrimenti non stampo
+                        if (p[dim].Casual !=  null)
+                        {
+                            listView1.Items.Add("Campo 1: " + campi[v]);
+                        }                        
+                        else
+                        {
+                            listView1.Items.Add("Campo 1: ");
+                        }
+                        
                     }
 
 
@@ -733,7 +757,16 @@ namespace Elaborazione_dati_CSV
                     }
                     else
                     {
-                        listView1.Items.Add("Campo 2: ");
+                        //In cui l'utente richieda mio valore e ci sono dei valori gli stampo altrimenti non stampo
+                        if (p[dim].Casual != null)
+                        {
+                            listView1.Items.Add("Campo 2: " + campi[b]);
+                        }
+                        else
+                        {
+                            listView1.Items.Add("Campo 2: ");
+                        }
+                        
                     }
 
 
@@ -764,7 +797,15 @@ namespace Elaborazione_dati_CSV
                     }
                     else
                     {
-                        listView1.Items.Add("Campo 3: ");
+                        //In cui l'utente richieda mio valore e ci sono dei valori gli stampo altrimenti non stampo
+                        if (p[dim].Casual != null)
+                        {
+                            listView1.Items.Add("Campo 3: " + campi[c]);
+                        }
+                        else
+                        {
+                            listView1.Items.Add("Campo 3: ");
+                        }
                     }
                     
                     
@@ -786,7 +827,6 @@ namespace Elaborazione_dati_CSV
             dim = 0;
 
             //Variabile di supporto impostata a 0
-            int v = 0;
 
             int a = 0;
 
