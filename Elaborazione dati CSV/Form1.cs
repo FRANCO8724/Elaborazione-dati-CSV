@@ -34,7 +34,7 @@ namespace Elaborazione_dati_CSV
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            numcasual();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -75,6 +75,49 @@ namespace Elaborazione_dati_CSV
         private void button11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        //Funzioni di servizio
+        public void numcasual()
+        {
+            Random num = new Random();
+
+            string[] arr = new string[1000];
+
+            int dim = 0;
+
+            using (StreamReader sw = new StreamReader(path))
+            {
+                string a = sw.ReadLine();
+
+                while (a != null)
+                {
+                    if (dim == 0)
+                    {
+                        arr[dim] = a + ";miovalore";
+                    }
+                    else
+                    {
+                        string b = (num.Next(10, 21)).ToString();
+                        arr[dim] = a + ";" + b;
+                    }
+                    dim++;
+                    a = sw.ReadLine();
+                }
+
+
+            }
+
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                dim = 0;
+
+                while (arr[dim] != null)
+                {
+                    sw.WriteLine(arr[dim]);
+                    dim++;
+                }
+            }
         }
     }
 }
