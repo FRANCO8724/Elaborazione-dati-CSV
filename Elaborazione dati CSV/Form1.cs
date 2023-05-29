@@ -39,7 +39,7 @@ namespace Elaborazione_dati_CSV
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Contacampi();
         }
         private void button3_Click_1(object sender, EventArgs e)
         {
@@ -117,6 +117,21 @@ namespace Elaborazione_dati_CSV
                     sw.WriteLine(arr[dim]);
                     dim++;
                 }
+            }
+        }
+
+        public void Contacampi()
+        {
+            using (StreamReader sw = new StreamReader(path))
+            {
+                string a = sw.ReadLine();
+
+                string[] campi = a.Split(';');
+
+                int lun = campi.Length;
+
+                listView1.Clear();
+                listView1.Items.Add("Ogni record è composto da: " + lun + " campi.");
             }
         }
     }
