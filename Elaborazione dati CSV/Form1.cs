@@ -16,6 +16,7 @@ namespace Elaborazione_dati_CSV
 {
     public partial class Form1 : Form
     {
+        //Dichiaro il percorso del file e la variabile numerica lunghezza
         public string path = @"../../Arrigoni.csv";
         public int lung = 0;
 
@@ -37,25 +38,29 @@ namespace Elaborazione_dati_CSV
 
         }
 
+        //Associo al tasto uno la funzione numeri casuali
         private void button1_Click(object sender, EventArgs e)
         {
             numcasual();
         }
 
+        //Associo al tasto due la funzione conta campi record
         private void button2_Click(object sender, EventArgs e)
         {
             Contacampi();
         }
+
+        //Associo al tasto tre la funzione per calcolare lunghezza massima di ogni campo e per la lunghezza del record più lungo che viene restituita
         private void button3_Click_1(object sender, EventArgs e)
         {
             lung = Lungmax();
         }
-
+        //Associo al tasto 5 la funzione che rende i record tutti della stessa lunghezza in base al dato ottenuto dalla funzione prima
         private void button5_Click(object sender, EventArgs e)
         {
             Lungfissa(lung);
         }
-
+        //Associo al tasto 6 la funzione per aggiungere un record al file e pulire le varie box
         private void button6_Click(object sender, EventArgs e)
         {
             Aggrecord();
@@ -72,7 +77,7 @@ namespace Elaborazione_dati_CSV
             textBox16.Text = "";
 
         }
-
+        //Associo al tasto 7 la funzione per visualizzare 3 campi a scelta e pulire le varie box
         private void button7_Click(object sender, EventArgs e)
         {
             Viscampi();
@@ -81,18 +86,20 @@ namespace Elaborazione_dati_CSV
             textBox4.Text = "";
         }
 
+        //Associo al tasto 8 la funzione per visualizzare un record in base al dato inserito dall'utente e che si trova al suo interno e pulire le varie box
         private void button8_Click(object sender, EventArgs e)
         {
             Ricercarec();
             textBox5.Text = "";
         }
-
+        //Associo al tasto 9 la modifica di un record del file e pulisco le varie box
         private void button9_Click(object sender, EventArgs e)
         {
             Modifica();
             textBox6.Text = "";
         }
 
+        //Associo al tasto 11 la funzione di cancellazione di un record nel file e pulisco le varie box
         private void button11_Click(object sender, EventArgs e)
         {
             Canclog();
