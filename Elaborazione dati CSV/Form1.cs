@@ -76,6 +76,9 @@ namespace Elaborazione_dati_CSV
         private void button7_Click(object sender, EventArgs e)
         {
             Viscampi();
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -87,11 +90,13 @@ namespace Elaborazione_dati_CSV
         private void button9_Click(object sender, EventArgs e)
         {
             Modifica();
+            textBox6.Text = "";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            Canclog();
+            textBox8.Text = "";
         }
 
         //Funzioni di servizio
@@ -340,6 +345,10 @@ namespace Elaborazione_dati_CSV
             int b1=0;
             int c1 = 0;
 
+            bool a2 = false;
+            bool b2 = false;
+            bool c2 = false;
+
             string[] pa = new string[1000];
             string[] pb = new string[1000];
             string[] pc = new string[1000];
@@ -354,19 +363,61 @@ namespace Elaborazione_dati_CSV
 
                 for(int i = 0; i < campi.Length; i++)
                 {
-                    if (campi[dim] == a)
+                    if (a == "miovalore")
                     {
-                        a1 = dim;
+                        a1 = 11;
+                    }
+                    else
+                    {
+                        if (a == "")
+                        {
+                            a2 = true;
+                        }
+                        else
+                        {
+                            if (campi[dim] == a)
+                            {
+                                a1 = dim;
+                            }
+                        }
                     }
 
-                    if (campi[dim] == b)
+                    if (b == "miovalore")
                     {
-                        b1 = dim;
+                        b1 = 11;
+                    }
+                    else
+                    {
+                        if (b == "")
+                        {
+                            b2 = true;
+                        }
+                        else
+                        {
+                            if (campi[dim] == b)
+                            {
+                                b1 = dim;
+                            }
+                        }
                     }
 
-                    if (campi[dim] == c)
+                    if (c == "miovalore")
                     {
-                        c1 = dim;
+                        c1 = 11;
+                    }
+                    else
+                    {
+                        if (c == "")
+                        {
+                            c2 = true;
+                        }
+                        else
+                        {
+                            if (campi[dim] == c)
+                            {
+                                c1 = dim;
+                            }
+                        }
                     }
 
                     dim++;
@@ -379,9 +430,33 @@ namespace Elaborazione_dati_CSV
 
                     string[] campi2 = d.Split(';');
 
-                    listView1.Items.Add("Campo 1:" + campi2[a1]);
-                    listView1.Items.Add("Campo 1:" + campi2[b1]);
-                    listView1.Items.Add("Campo 1:" + campi2[c1]);
+                    if(a2 == true)
+                    {
+                        listView1.Items.Add("Campo 1:");
+                    }
+                    else
+                    {
+                        listView1.Items.Add("Campo 1:" + campi2[a1]);
+                    }
+
+                    if (b2 == true)
+                    {
+                        listView1.Items.Add("Campo 2:");
+                    }
+                    else
+                    {
+                        listView1.Items.Add("Campo 1:" + campi2[b1]);
+                    }
+
+                    if (c2 == true)
+                    {
+                        listView1.Items.Add("Campo 3:");
+                    }
+                    else
+                    {
+                        listView1.Items.Add("Campo 3:" + campi2[c1]);
+                    }
+
                     listView1.Items.Add("");
 
                     d = sw.ReadLine();
@@ -411,9 +486,16 @@ namespace Elaborazione_dati_CSV
 
                 for (int i = 0; i < campi.Length; i++)
                 {
-                    if (campi[dim] == a)
+                    if ("miovalore" == a)
                     {
-                        cont = dim;
+                        cont = 11;
+                    }
+                    else
+                    {
+                        if (campi[dim] == a)
+                        {
+                            cont = dim;
+                        }
                     }
                     
                     dim++;
@@ -628,6 +710,55 @@ namespace Elaborazione_dati_CSV
             }
         }
 
+        public void Canclog()
+        {
+            bool[] a = new bool[1000];
+
+            string[] a2 = new string[1000];
+
+            string c = textBox8.Text;
+
+            int dim = 0;
+
+            using (StreamReader sw = new StreamReader(path))
+            {
+                string b = sw.ReadLine();
+
+                while(b != null)
+                {
+                    a2[dim] = b;
+
+                    string[] campi = b.Split(';');
+
+                    if (campi[0] == c)
+                    {
+                        a[dim] = false;
+                    }
+                    else
+                    {
+                        a[dim] = true;
+                    }
+                    dim++;
+
+                    b = sw.ReadLine();
+                }
+            }
+
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                dim = 0;
+
+                while (a2[dim] != null)
+                {
+
+                    if (a[dim] == true)
+                    {
+                        sw.WriteLine(a2[dim]);
+                    }
+                    dim++;
+                }
+            }
+        }
 
     }
 }

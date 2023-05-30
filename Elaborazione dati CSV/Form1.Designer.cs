@@ -278,7 +278,7 @@
             this.textBox8.Location = new System.Drawing.Point(391, 519);
             this.textBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(364, 20);
+            this.textBox8.Size = new System.Drawing.Size(380, 20);
             this.textBox8.TabIndex = 23;
             // 
             // label2
@@ -355,9 +355,9 @@
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label10.Location = new System.Drawing.Point(388, 493);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(367, 13);
+            this.label10.Size = new System.Drawing.Size(383, 13);
             this.label10.TabIndex = 32;
-            this.label10.Text = "Inserire primo campo del record da cancellare";
+            this.label10.Text = "Inserire campo COD_ACQ del record da cancellare";
             // 
             // label11
             // 
