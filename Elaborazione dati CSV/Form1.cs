@@ -16,13 +16,16 @@ namespace Elaborazione_dati_CSV
     public partial class Form1 : Form
     {
         public string path = @"../../Arrigoni.csv";
-        public int lung=0;
+        public int lung = 0;
 
         public Form1()
         {
             InitializeComponent();
         }
+        private void textBox18_TextChanged(object sender, EventArgs e)
+        {
 
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -54,7 +57,18 @@ namespace Elaborazione_dati_CSV
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            Aggrecord();
+            textBox1.Text = "";
+            textBox9.Text = "";
+            textBox10.Text = "";
+            textBox11.Text = "";
+            textBox12.Text = "";
+            textBox18.Text = "";
+            textBox13.Text = "";
+            textBox15.Text = "";
+            textBox14.Text = "";
+            textBox17.Text = "";
+            textBox16.Text = "";
 
         }
 
@@ -263,6 +277,57 @@ namespace Elaborazione_dati_CSV
                 }
             }
         }
+
+        public void Aggrecord()
+        {
+            bool[] a = new bool[1000];
+
+            string[] p = new string[1000];
+
+            int dim = 0;
+
+            using(StreamReader sw = new StreamReader(path))
+            {
+                string b = sw.ReadLine();
+
+                while (b != null)
+                {
+                    a[dim] = true;
+
+                    p[dim] = b;
+
+                    b = sw.ReadLine();
+
+                    dim++;
+                }
+
+                if(b == null)
+                {
+                    a[dim] = false;
+                }
+
+            }
+
+            using(StreamWriter sw = new StreamWriter(path))
+            {
+                dim = 0;
+
+                while (dim<1000)
+                {                    
+
+                    if (a[dim] == false)
+                    {
+                        sw.WriteLine(textBox1.Text + ";" + textBox9.Text + ";" + textBox10.Text + ";" + textBox11.Text + ";" + textBox12.Text + ";" + textBox18.Text + ";" + textBox13.Text + ";" + textBox15.Text + ";" + textBox14.Text + ";" + textBox17.Text + ";" + textBox16.Text);
+                        break;
+                    }
+
+                    sw.WriteLine(p[dim]);
+
+                    dim++;
+                }
+            }
+        }
+
 
     }
 }
