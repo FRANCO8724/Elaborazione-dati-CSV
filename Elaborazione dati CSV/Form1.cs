@@ -81,11 +81,12 @@ namespace Elaborazione_dati_CSV
         private void button8_Click(object sender, EventArgs e)
         {
             Ricercarec();
+            textBox5.Text = "";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            Modifica();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -458,6 +459,173 @@ namespace Elaborazione_dati_CSV
             listView1.Clear();
             listView1.Items.Add("Parola più lunga all'interno del campo " + textBox5.Text + " :");
             listView1.Items.Add(b);
+        }
+
+        public void Modifica()
+        {
+            string a = textBox6.Text;
+
+            string[] ele = new string[1000];
+
+            int dim = 0;
+
+            int control = 0;
+
+            using (StreamReader sw = new StreamReader(path))
+            { 
+               string b = sw.ReadLine();
+
+               while( b != null) 
+               {
+                    ele[dim] = b;
+
+                    string[] campi = ele[dim].Split(';');
+
+                    for(int i = 0;i < campi.Length;i++)
+                    {
+                        if (campi[i] == a)
+                        {
+                            control = dim;
+                        }
+                    }
+                       
+                    dim++;
+
+                    b = sw.ReadLine();
+                }
+            }
+
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                dim = 0;
+
+                string r = "";
+
+                while (ele[dim] !=  null)
+                {
+                    if(dim == control)
+                    {
+                        string[] campi2 = ele[dim].Split(';');
+
+                        if (textBox1.Text != null)
+                        {
+                            r = r + textBox1.Text;
+                        }
+                        else
+                        {
+                            string[] campi3 = ele[dim].Split(';');
+                            r = r + campi3[dim];
+                        }
+
+                        if (textBox9.Text != null)
+                        {
+                            r = r + ";" + textBox9.Text;
+                        }
+                        else
+                        {
+                            string[] campi4 = ele[dim].Split(';');
+                            r = r + ";" + campi4[dim];
+                        }
+
+                        if (textBox10.Text != null)
+                        {
+                            r = r + ";" + textBox9.Text;
+                        }
+                        else
+                        {
+                            string[] campi5 = ele[dim].Split(';');
+                            r = r + ";" + campi5[dim];
+                        }
+
+                        if (textBox11.Text != null)
+                        {                           
+                            r = r + ";" + textBox11.Text;
+                        }
+                        else
+                        {
+                            string[] campi6 = ele[dim].Split(';');
+                            r = r + ";" + campi6[dim];
+                        }
+
+                        if (textBox12.Text != null)
+                        {
+                            r = r + ";" + textBox12.Text;
+                        }
+                        else
+                        {
+                            string[] campi7 = ele[dim].Split(';');
+                            r = r + ";" + campi7[dim];
+                        }
+
+                        if (textBox18.Text != null)
+                        {
+                            r = r + ";" + textBox18.Text;
+                        }
+                        else
+                        {
+                            string[] campi8 = ele[dim].Split(';');
+                            r = r + ";" + campi8[dim];
+                        }
+
+                        if (textBox13.Text != null)
+                        {
+                            r = r + ";" + textBox13.Text;
+                        }
+                        else
+                        {
+                            string[] campi9 = ele[dim].Split(';');
+                            r = r + ";" + campi9[dim];
+                        }
+
+                        if (textBox15.Text != null)
+                        {
+                            r = r + ";" + textBox15.Text;
+                        }
+                        else
+                        {
+                            string[] campi10 = ele[dim].Split(';');
+                            r = r + ";" + campi10[dim];
+                        }
+
+                        if (textBox14.Text != null)
+                        {
+                            r = r + ";" + textBox14.Text;
+                        }
+                        else
+                        {
+                            string[] campi11 = ele[dim].Split(';');
+                            r = r + ";" + campi11[dim];
+                        }
+
+                        if (textBox17.Text != null)
+                        {
+                            r = r + ";" + textBox17.Text;
+                        }
+                        else
+                        {
+                            string[] campi12 = ele[dim].Split(';');
+                            r = r + ";" + ele[dim];
+                        }
+                        if (textBox16.Text != null)
+                        {
+                            r = r + ";" + textBox16.Text;
+                        }
+                        else
+                        {
+                            string[] campi13 = ele[dim].Split(';');
+                            r = r + ";" + ele[dim];
+                        }
+
+                        sw.WriteLine(r);
+                    }
+                    else
+                    {
+                        sw.WriteLine(ele[dim]);
+                    }
+
+                    dim++;
+                }
+            }
         }
 
 

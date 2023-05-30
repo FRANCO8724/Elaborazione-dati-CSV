@@ -224,7 +224,7 @@
             this.button11.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button11.Font = new System.Drawing.Font("Noto Mono", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.Location = new System.Drawing.Point(40, 519);
+            this.button11.Location = new System.Drawing.Point(40, 506);
             this.button11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(331, 39);
@@ -275,7 +275,7 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(391, 529);
+            this.textBox8.Location = new System.Drawing.Point(391, 519);
             this.textBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(364, 20);
@@ -345,15 +345,15 @@
             this.label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label8.Location = new System.Drawing.Point(388, 422);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(319, 13);
+            this.label8.Size = new System.Drawing.Size(271, 13);
             this.label8.TabIndex = 30;
-            this.label8.Text = "Inserire campo del record da modificare";
+            this.label8.Text = "Inserire campo del record COD_ACQ";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(388, 499);
+            this.label10.Location = new System.Drawing.Point(388, 493);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(367, 13);
             this.label10.TabIndex = 32;
