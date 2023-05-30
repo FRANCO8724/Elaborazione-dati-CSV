@@ -49,7 +49,7 @@ namespace Elaborazione_dati_CSV
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            Lungfissa(lung);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -199,10 +199,70 @@ namespace Elaborazione_dati_CSV
                     dim++;
                 }
 
-                lung = arr[arr.Length - 1] + 1;
+                lung = arr[arr.Length - 1];
             }
 
             return lung;
         }
+
+        public void Lungfissa(int lung)
+        {
+            if (lung == 0)
+            {
+                listView1.Clear();
+                listView1.Items.Add("Calcolare prima lunghezza del record più lungo che compone il file");
+            }
+            else
+            {
+
+                int[] cont = new int[1000];
+
+                string[] cont2 = new string[1000];
+
+                int dim = 0;
+
+                using (StreamReader sw = new StreamReader(path))
+                {
+                    string a;
+
+                    a = sw.ReadLine();
+
+                    while (a != null)
+                    {
+                        int b = a.Length;
+
+                        cont[dim] = lung - b;
+
+                        cont2[dim] = a;
+
+                        dim++;
+
+                        a = sw.ReadLine();
+                    }
+
+                }
+
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    dim = 0;
+
+                    while (cont2[dim] != null)
+                    {
+
+                        string a = null;
+
+                        for (int j = 0; j < cont[dim]; j++)
+                        {
+                            a = a + " ";
+                        }
+
+                        sw.WriteLine(cont2[dim] + a);
+
+                        dim++;
+                    }
+                }
+            }
+        }
+
     }
 }
