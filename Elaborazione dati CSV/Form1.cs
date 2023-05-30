@@ -80,7 +80,7 @@ namespace Elaborazione_dati_CSV
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            Ricercarec();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -381,12 +381,83 @@ namespace Elaborazione_dati_CSV
                     listView1.Items.Add("Campo 1:" + campi2[a1]);
                     listView1.Items.Add("Campo 1:" + campi2[b1]);
                     listView1.Items.Add("Campo 1:" + campi2[c1]);
+                    listView1.Items.Add("");
 
                     d = sw.ReadLine();
                 }
 
             }
 
+        }
+
+        public void Ricercarec()
+        {
+            string a = textBox5.Text;
+
+            int cont = 0;
+
+            int dim = 0;
+
+            string[] ele = new string[1000];
+
+            using(StreamReader sw = new StreamReader(path))
+            {
+                string d = sw.ReadLine();
+
+                string[] campi = d.Split(';');
+
+                dim = 0;
+
+                for (int i = 0; i < campi.Length; i++)
+                {
+                    if (campi[dim] == a)
+                    {
+                        cont = dim;
+                    }
+                    
+                    dim++;
+                }
+
+                dim = 0;
+
+                while(d != null)
+                {
+                    string[] campi2 = d.Split(';');
+
+                    ele[dim] = campi2[cont];
+
+                    d = sw.ReadLine();
+                    dim++;
+                }
+            }
+
+            string b = "";
+
+            int t = 0;
+
+            for(int i  = 0; i < ele.Length; i++)
+            {
+                if (ele[i+1] != null)
+                {
+                    if (ele[t].Length >= ele[i+1].Length)
+                    {
+                        b = ele[t];
+                    }
+                    else
+                    {
+                        b = ele[i+1];
+                        t = i + 1;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            listView1.Clear();
+            listView1.Items.Add("Parola più lunga all'interno del campo " + textBox5.Text + " :");
+            listView1.Items.Add(b);
         }
 
 

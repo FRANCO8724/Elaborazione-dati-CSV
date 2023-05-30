@@ -45,7 +45,6 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,7 +53,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -226,7 +224,7 @@
             this.button11.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button11.Font = new System.Drawing.Font("Noto Mono", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.Location = new System.Drawing.Point(40, 592);
+            this.button11.Location = new System.Drawing.Point(40, 519);
             this.button11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(331, 39);
@@ -275,17 +273,9 @@
             this.textBox6.Size = new System.Drawing.Size(316, 20);
             this.textBox6.TabIndex = 21;
             // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(40, 512);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(776, 20);
-            this.textBox7.TabIndex = 22;
-            // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(406, 602);
+            this.textBox8.Location = new System.Drawing.Point(391, 529);
             this.textBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(364, 20);
@@ -359,21 +349,11 @@
             this.label8.TabIndex = 30;
             this.label8.Text = "Inserire campo del record da modificare";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label9.Location = new System.Drawing.Point(37, 496);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(215, 13);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Inserire record modificato";
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(403, 586);
+            this.label10.Location = new System.Drawing.Point(388, 499);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(367, 13);
             this.label10.TabIndex = 32;
@@ -588,7 +568,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -597,7 +576,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -644,7 +622,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -653,7 +630,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox9;
