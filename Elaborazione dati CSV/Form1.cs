@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -74,7 +75,7 @@ namespace Elaborazione_dati_CSV
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            Viscampi();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -326,6 +327,66 @@ namespace Elaborazione_dati_CSV
                     dim++;
                 }
             }
+        }
+
+        public void Viscampi()
+        {
+            string a = textBox2.Text;
+            string b = textBox3.Text;
+            string c = textBox4.Text;
+
+            int a1=0;
+            int b1=0;
+            int c1 = 0;
+
+            string[] pa = new string[1000];
+            string[] pb = new string[1000];
+            string[] pc = new string[1000];
+
+            using(StreamReader sw  = new StreamReader(path)) 
+            {
+                string d = sw.ReadLine();
+
+                string[] campi = d.Split(';');
+
+                int dim = 0;
+
+                for(int i = 0; i < campi.Length; i++)
+                {
+                    if (campi[dim] == a)
+                    {
+                        a1 = dim;
+                    }
+
+                    if (campi[dim] == b)
+                    {
+                        b1 = dim;
+                    }
+
+                    if (campi[dim] == c)
+                    {
+                        c1 = dim;
+                    }
+
+                    dim++;
+                }
+
+                listView1.Clear();
+                
+                while(d != null)
+                {                    
+
+                    string[] campi2 = d.Split(';');
+
+                    listView1.Items.Add("Campo 1:" + campi2[a1]);
+                    listView1.Items.Add("Campo 1:" + campi2[b1]);
+                    listView1.Items.Add("Campo 1:" + campi2[c1]);
+
+                    d = sw.ReadLine();
+                }
+
+            }
+
         }
 
 
